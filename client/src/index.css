@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── DESIGN TOKENS ──────────────────────────────────────────── */
+:root {
+  --g0: #0A0C0E;
+  --g1: #101317;
+  --ink: #EDE7DC;
+  --ink2: #9EA5A8;
+  --muted: #6C7378;
+  --amber: #E8913C;
+  --teal: #2E6B72;
+  --hair: rgba(237,231,220,.13);
+  color-scheme: dark;
+}
+
+/* ─── BASE ───────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--g0);
+  color: var(--ink);
+  font-family: 'Sora', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--g0); }
+::-webkit-scrollbar-thumb { background: rgba(237,231,220,.18); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(237,231,220,.3); }
+
+/* ─── GLASS PANELS (re-keyed to label palette) ───────────────── */
+.glass-panel {
+  background: rgba(16,19,23,0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--hair);
+}
+.glass-panel-elevated {
+  background: rgba(16,19,23,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(237,231,220,.20);
+}
+
+/* ─── LABEL UTILITY ──────────────────────────────────────────── */
+.lbl {
+  font-family: 'Sora', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+/* ─── HAIRLINE RULES ─────────────────────────────────────────── */
+.rule-h { display: block; width: 100%; height: 1px; background: var(--hair); }
+
+/* ─── ACCENT PILL BUTTON ─────────────────────────────────────── */
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  font-family: 'Sora', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.pill-btn:hover { border-color: var(--amber); color: var(--amber); }
+.pill-btn-solid {
+  background: var(--ink);
+  color: var(--g0);
+  border-color: var(--ink);
+}
+.pill-btn-solid:hover { background: var(--amber); border-color: var(--amber); color: var(--g0); }
+
+/* ─── STATUS DOTS ────────────────────────────────────────────── */
+.status-dot {
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-dot-amber { background: var(--amber); }
+.status-dot-teal  { background: var(--teal); }
+.status-dot-muted { background: var(--muted); }
+
+/* ─── INPUT FIELDS ───────────────────────────────────────────── */
+.field {
+  width: 100%;
+  background: var(--g1);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12.5px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .2s;
+}
+.field:focus { border-color: var(--amber); }
+.field::placeholder { color: var(--muted); }
+select.field option { background: var(--g1); color: var(--ink); }
+
+/* ─── CARD ───────────────────────────────────────────────────── */
+.it-card {
+  background: var(--g1);
+  border: 1px solid var(--hair);
+  border-radius: 6px;
+  padding: 20px 24px;
+}
+
+/* ─── STATUS BADGES ──────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.badge-open    { background: rgba(232,145,60,.12);  color: var(--amber); border: 1px solid rgba(232,145,60,.3); }
+.badge-prog    { background: rgba(46,107,114,.14);  color: var(--teal);  border: 1px solid rgba(46,107,114,.3); }
+.badge-closed  { background: rgba(108,115,120,.12); color: var(--muted); border: 1px solid rgba(108,115,120,.25); }
+.badge-crit    { background: rgba(180,60,60,.14);   color: #c97070;      border: 1px solid rgba(180,60,60,.3); }
+.badge-nominal { background: rgba(46,107,114,.14);  color: var(--teal);  border: 1px solid rgba(46,107,114,.3); }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:.5; transform:scale(.7); }
+}
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }

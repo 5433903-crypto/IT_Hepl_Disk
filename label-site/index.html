@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MERIDIAN. — An Independent Record Label</title>
+<meta name="description" content="MERIDIAN. — Catalogue, artists, and upcoming dates from an independent record label."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* TOKENS */
+:root{
+  --g0:#0A0C0E;--g1:#101317;
+  --ink:#EDE7DC;--ink2:#9EA5A8;--muted:#6C7378;
+  --amber:#E8913C;--teal:#2E6B72;
+  --hair:rgba(237,231,220,.13);
+  --fd:'Syne',sans-serif;--fb:'Sora',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--g0);color:var(--ink);font-family:var(--fb);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* UTILITIES */
+.lbl{font-family:var(--fb);font-size:10.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+.dot{display:inline-block;width:4px;height:4px;border-radius:50%;
+  background:var(--amber);flex-shrink:0;vertical-align:middle}
+.dot-t{background:var(--teal)}
+.rule{display:block;width:28px;height:1px;background:var(--amber);flex-shrink:0}
+.rule-t{background:var(--teal)}
+
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;
+  border:1px solid var(--hair);border-radius:999px;
+  font-family:var(--fb);font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink);
+  transition:border-color .2s,color .2s}
+.pill:hover{border-color:var(--amber);color:var(--amber)}
+.pill-s{background:var(--ink);color:var(--g0);border-color:var(--ink)}
+.pill-s:hover{background:var(--amber);border-color:var(--amber);color:var(--g0)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;height:58px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 32px;
+  background:rgba(10,12,14,.72);backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.nav-wm{font-family:var(--fd);font-size:15px;font-weight:800;
+  letter-spacing:-.02em}.nav-wm .p{color:var(--amber)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-link{font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink2);transition:color .2s}
+.nav-link:hover{color:var(--amber)}
+
+/* HERO */
+.hero{position:relative;height:250vh}
+.hero-stage{position:sticky;top:0;height:100vh;overflow:hidden;isolation:isolate}
+.hero-img{position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;
+  transform-origin:center;will-change:transform}
+.hero-duo{position:absolute;inset:0;mix-blend-mode:overlay;opacity:0;
+  background:linear-gradient(135deg,var(--amber),var(--teal));pointer-events:none}
+.hero-veil{position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 38%,rgba(10,12,14,.74) 100%);
+  pointer-events:none}
+.panel{position:absolute;top:0;bottom:0;width:52%;background:var(--g0);will-change:transform}
+.panel-l{left:0}
+.panel-r{right:0}
+.hero-dot{position:absolute;top:50%;left:50%;width:6px;height:6px;
+  border-radius:50%;translate:-50% -50%;will-change:transform,opacity;pointer-events:none}
+.dot-amber{background:var(--amber)}
+.dot-teal-d{background:var(--teal)}
+
+.hero-tw{position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;pointer-events:none}
+.hero-title{font-family:var(--fd);font-size:clamp(52px,9vw,128px);font-weight:800;
+  letter-spacing:-.02em;color:var(--ink);display:flex;
+  mix-blend-mode:difference;white-space:nowrap;user-select:none;
+  will-change:transform,letter-spacing}
+.hero-title .tl,.hero-title .tr{display:inline-block;will-change:transform}
+.hero-title .p{color:var(--amber)}
+
+.hero-meta{position:absolute;font-size:10.5px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);
+  display:flex;align-items:center;gap:8px}
+.hm-tl{top:80px;left:32px}.hm-tr{top:80px;right:32px}
+.hm-bl{bottom:32px;left:32px}.hm-br{bottom:32px;right:32px}
+
+/* STATEMENT */
+.statement{position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:120px 64px 120px 10vw;overflow:hidden;background:var(--g0)}
+.st-inner{position:relative;z-index:2;max-width:680px}
+.st-heading{font-family:var(--fd);font-size:clamp(24px,3.6vw,52px);font-weight:700;
+  letter-spacing:-.025em;line-height:1.12;max-width:22ch;margin-bottom:40px}
+.st-heading .hl{color:var(--amber)}
+.st-idx{position:absolute;top:50%;right:8vw;translate:0 -50%;
+  font-family:var(--fd);font-size:clamp(160px,20vw,280px);font-weight:800;
+  letter-spacing:-.04em;-webkit-text-stroke:1px rgba(237,231,220,.17);
+  color:transparent;line-height:1;pointer-events:none;user-select:none;z-index:1}
+.st-circle{position:absolute;right:-6vw;top:50%;translate:0 -50%;
+  width:clamp(180px,22vw,320px);height:clamp(180px,22vw,320px);
+  border-radius:50%;overflow:hidden;opacity:.28;will-change:transform;z-index:3}
+.st-circle img{width:100%;height:100%;object-fit:cover}
+
+/* RELEASES */
+.releases{padding:140px 64px;background:var(--g1);border-top:1px solid var(--hair)}
+.rel-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.rel-heading{font-family:var(--fd);font-size:clamp(36px,4.5vw,64px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.06;margin-bottom:20px}
+.rel-lede{font-size:14px;line-height:1.72;color:var(--ink2);max-width:38ch;margin-bottom:36px}
+.rel-acts{display:flex;gap:12px;flex-wrap:wrap}
+
+/* DECK */
+.deck-wrap{position:relative;width:100%;padding-bottom:100%}
+.deck{position:absolute;inset:0;cursor:grab;outline:none}
+.deck:active{cursor:grabbing}
+.deck:focus-visible{outline:1px solid var(--amber);outline-offset:4px}
+.card{position:absolute;inset:0;border-radius:4px;overflow:hidden;
+  will-change:transform,opacity;transform-origin:center bottom;
+  box-shadow:0 16px 48px rgba(0,0,0,.58),0 4px 12px rgba(0,0,0,.4);
+  user-select:none;-webkit-user-drag:none;touch-action:pan-y}
+.card img{width:100%;height:100%;object-fit:cover;pointer-events:none;
+  -webkit-user-drag:none;user-select:none}
+.card-lbl{position:absolute;bottom:0;left:0;right:0;padding:20px 18px 16px;
+  background:linear-gradient(to top,rgba(10,12,14,.9) 0%,transparent 100%);
+  display:flex;justify-content:space-between;align-items:flex-end}
+.card-title{font-family:var(--fd);font-size:15px;font-weight:700;letter-spacing:-.02em}
+.card-code{font-family:var(--fb);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+
+.deck-hint{margin-top:14px;display:flex;align-items:center;justify-content:space-between}
+.deck-hint-txt{font-size:10.5px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:7px}
+.deck-dots{display:flex;gap:6px;align-items:center}
+.ddot{width:5px;height:5px;border-radius:50%;background:var(--muted);
+  transition:background .2s,transform .2s}
+.ddot.on{background:var(--amber);transform:scale(1.4)}
+
+/* ROSTER */
+.roster{padding:120px 64px 0;background:var(--g0);border-top:1px solid var(--hair)}
+.roster-row{display:grid;grid-template-columns:1fr auto;align-items:baseline;
+  padding:18px 0;border-top:1px solid var(--hair)}
+.roster-row:last-child{border-bottom:1px solid var(--hair)}
+.roster-name{font-family:var(--fd);font-size:clamp(18px,2.4vw,30px);
+  font-weight:700;letter-spacing:-.02em}
+.roster-meta{display:flex;align-items:center;gap:16px;font-size:10.5px;
+  font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.roster-ct{color:var(--ink2);font-size:12px}
+
+/* DATES */
+.dates{padding:80px 64px 120px;background:var(--g0)}
+.dates-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.dtbl{width:100%;border-collapse:collapse}
+.dtbl th{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding:10px 0;text-align:left;border-bottom:1px solid var(--hair)}
+.dtbl th:last-child{text-align:right}
+.dtbl td{padding:16px 0;border-bottom:1px solid var(--hair);vertical-align:baseline}
+.d-artist{font-family:var(--fd);font-size:clamp(15px,1.8vw,22px);
+  font-weight:700;letter-spacing:-.02em}
+.d-city,.d-venue{font-size:13px;color:var(--ink2);padding-left:24px}
+.d-st{text-align:right;font-size:10.5px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.d-avail{color:var(--teal)}.d-sold{opacity:.5}
+
+/* CLOSE */
+.cls{padding:120px 64px 0;background:var(--g1);border-top:1px solid var(--hair)}
+.cls-inner{display:flex;flex-direction:column;gap:24px;max-width:580px;margin-bottom:80px}
+.cls-h{font-family:var(--fd);font-size:clamp(28px,4vw,56px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.08}
+.cls-fine{font-size:11px;color:var(--muted);letter-spacing:.06em;line-height:1.72}
+.cls-acts{display:flex;gap:12px;flex-wrap:wrap}
+.cls-foot{border-top:1px solid var(--hair);padding:18px 0;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.cls-wm{font-family:var(--fd);font-size:clamp(80px,16vw,200px);font-weight:800;
+  letter-spacing:-.04em;color:var(--ink);line-height:.85;
+  translate:0 18%;margin-top:32px;white-space:nowrap;overflow:hidden}
+.cls-wm .p{color:var(--amber)}
+
+/* REVEAL */
+.rv{opacity:0;translate:0 22px;transition:opacity .7s ease,translate .7s ease}
+.rv.on{opacity:1;translate:0 0}
+
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1!important;translate:0!important;transition:none!important}
+  .panel-l{transform:translateX(-110%)!important}
+  .panel-r{transform:translateX(110%)!important}
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none}
+  .rel-inner{grid-template-columns:1fr;gap:56px}
+  .deck-wrap{padding-bottom:90vw;max-width:90vw;margin:0 auto}
+  .statement,.releases,.roster,.dates,.cls{padding-left:24px;padding-right:24px}
+  .hm-tr,.hm-br{display:none}
+  .hm-tl{left:16px}.hm-bl{left:16px}
+  .dtbl thead{display:none}
+  .dtbl tr{display:grid;grid-template-columns:1fr 1fr;gap:4px;
+    padding:14px 0;border-bottom:1px solid var(--hair)}
+  .dtbl td{padding:2px 0;border:none}
+  .d-city,.d-venue{padding-left:0}
+  .d-st{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary navigation">
+  <span class="nav-wm">MERIDIAN<span class="p">.</span></span>
+  <div class="nav-links">
+    <a class="nav-link" href="#releases">Catalogue</a>
+    <a class="nav-link" href="#roster">Artists</a>
+    <a class="nav-link" href="#dates">Dates</a>
+    <a class="nav-link" href="#contact">Contact</a>
+  </div>
+  <a class="pill pill-s" href="#contact" style="margin-left:12px">Demos</a>
+</nav>
+
+<!-- PORTAL HERO -->
+<section class="hero" id="home" aria-label="Portal hero">
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-img" id="heroImg" role="img" aria-label="Record label photography"></div>
+    <div class="hero-duo" id="heroDuo" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="panel panel-l" id="pL" aria-hidden="true"></div>
+    <div class="panel panel-r" id="pR" aria-hidden="true"></div>
+    <div class="hero-dot dot-amber" id="dA" aria-hidden="true"></div>
+    <div class="hero-dot dot-teal-d" id="dT" aria-hidden="true"></div>
+    <div class="hero-tw" aria-hidden="true">
+      <h1 class="hero-title" id="hTitle">
+        <span class="tl" id="tL">MERI</span><span class="tr" id="tR">DIAN<span class="p">.</span></span>
+      </h1>
+    </div>
+    <p class="hero-meta hm-tl lbl"><span class="dot"></span>Est. 2018 &middot; London</p>
+    <p class="hero-meta hm-tr lbl"><span class="dot dot-t"></span>Catalogue MDN-001 &ndash; MDN-024</p>
+    <p class="hero-meta hm-bl lbl"><span class="rule rule-t"></span>Independent</p>
+    <p class="hero-meta hm-br lbl">Scroll to open<span class="dot" style="margin-left:8px"></span></p>
+  </div>
+</section>
+
+<!-- STATEMENT FOLD -->
+<section class="statement" id="about" aria-label="Label statement">
+  <span class="st-idx" aria-hidden="true">01</span>
+  <div class="st-inner">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px" class="rv">
+      <span class="dot"></span><span class="lbl">About the label</span>
+    </div>
+    <h2 class="st-heading rv">
+      Music documented <span class="hl">on its own terms</span>, released without concession to format or format-holders.
+    </h2>
+    <p class="lbl rv" style="color:var(--muted);display:flex;align-items:center;gap:8px">
+      <span class="rule rule-t"></span>London &middot; Kyoto &middot; Accra
+    </p>
+  </div>
+  <div class="st-circle" id="stCircle">
+    <img src="https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=600&q=80&auto=format&fit=crop" alt="" aria-hidden="true"/>
+  </div>
+</section>
+
+<!-- RELEASES -->
+<section class="releases" id="releases" aria-label="Catalogue releases">
+  <div class="rel-inner">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px" class="rv">
+        <span class="dot dot-t"></span><span class="lbl" style="color:var(--teal)">Catalogue</span>
+      </div>
+      <h2 class="rel-heading rv">Twenty-four releases. No filler.</h2>
+      <p class="rel-lede rv">Every MDN record is hand-selected after a minimum three-month listening period. Vinyl and digital editions ship on the same day. Bandcamp receives no exclusivity window.</p>
+      <div class="rel-acts rv">
+        <a class="pill pill-s" href="#">Full Catalogue</a>
+        <a class="pill" href="#">Bandcamp &nearr;</a>
+      </div>
+    </div>
+    <div>
+      <div class="deck-wrap">
+        <div class="deck" id="deck" role="listbox" aria-label="Release catalogue" tabindex="0" aria-activedescendant="c0"></div>
+      </div>
+      <div class="deck-hint">
+        <span class="deck-hint-txt"><span class="dot"></span>Drag or use &larr; &rarr;</span>
+        <div class="deck-dots" id="dDots" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROSTER -->
+<section class="roster" id="roster" aria-label="Artist roster">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:32px" class="rv">
+    <span class="dot dot-t"></span><span class="lbl" style="color:var(--teal)">Artists</span>
+  </div>
+  <div role="list">
+    <div class="roster-row rv" role="listitem">
+      <span class="roster-name">Halcyon Wire</span>
+      <span class="roster-meta"><span class="lbl">Electronic</span><span class="dot dot-t"></span><span class="roster-ct">6 releases</span></span>
+    </div>
+    <div class="roster-row rv" role="listitem">
+      <span class="roster-name">Nneka Osei</span>
+      <span class="roster-meta"><span class="lbl">Jazz / Afrobeat</span><span class="dot dot-t"></span><span class="roster-ct">4 releases</span></span>
+    </div>
+    <div class="roster-row rv" role="listitem">
+      <span class="roster-name">Pale Meridian</span>
+      <span class="roster-meta"><span class="lbl">Post-rock</span><span class="dot dot-t"></span><span class="roster-ct">5 releases</span></span>
+    </div>
+    <div class="roster-row rv" role="listitem">
+      <span class="roster-name">Kaito Mura</span>
+      <span class="roster-meta"><span class="lbl">Ambient</span><span class="dot dot-t"></span><span class="roster-ct">3 releases</span></span>
+    </div>
+    <div class="roster-row rv" role="listitem">
+      <span class="roster-name">The Lacquer Club</span>
+      <span class="roster-meta"><span class="lbl">Soul / Funk</span><span class="dot dot-t"></span><span class="roster-ct">6 releases</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- DATES -->
+<section class="dates" id="dates" aria-label="Upcoming dates">
+  <div class="dates-top rv">
+    <div style="display:flex;align-items:center;gap:10px"><span class="dot"></span><span class="lbl">Upcoming dates</span></div>
+    <span class="lbl" style="color:var(--muted)">2026 &ndash; 2027</span>
+  </div>
+  <table class="dtbl" aria-label="Tour and event dates">
+    <thead><tr>
+      <th scope="col">Date</th><th scope="col">Artist</th>
+      <th scope="col">City</th><th scope="col">Venue</th><th scope="col">Tickets</th>
+    </tr></thead>
+    <tbody>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Nov 08</td><td class="d-artist">Halcyon Wire</td><td class="d-city">London, UK</td><td class="d-venue">Barbican Hall</td><td class="d-st d-avail">Available</td></tr>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Nov 22</td><td class="d-artist">Nneka Osei</td><td class="d-city">Accra, GH</td><td class="d-venue">National Theatre</td><td class="d-st d-avail">Available</td></tr>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Dec 05</td><td class="d-artist">Pale Meridian</td><td class="d-city">Berlin, DE</td><td class="d-venue">Berghain Kantine</td><td class="d-st d-sold">Sold Out</td></tr>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Dec 14</td><td class="d-artist">Kaito Mura</td><td class="d-city">Kyoto, JP</td><td class="d-venue">Kyoto Concert Hall</td><td class="d-st d-avail">Available</td></tr>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Jan 19</td><td class="d-artist">The Lacquer Club</td><td class="d-city">New York, US</td><td class="d-venue">Le Poisson Rouge</td><td class="d-st d-avail">Available</td></tr>
+      <tr class="rv"><td class="lbl" style="color:var(--muted)">Feb 03</td><td class="d-artist">Halcyon Wire</td><td class="d-city">Tokyo, JP</td><td class="d-venue">WWW X</td><td class="d-st d-avail">Available</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- CLOSE -->
+<section class="cls" id="contact" aria-label="Contact and close">
+  <div class="cls-inner">
+    <div style="display:flex;align-items:center;gap:10px" class="rv"><span class="dot"></span><span class="lbl">Work with us</span></div>
+    <h2 class="cls-h rv">Send your demos. We listen to everything.</h2>
+    <p class="cls-fine rv">Meridian is not accepting unsolicited physical media.<br/>
+    Digital submissions only. We aim to respond within 8 weeks.<br/>
+    MDN A&amp;R &mdash; demos@meridian-records.co</p>
+    <div class="cls-acts rv">
+      <a class="pill pill-s" href="mailto:demos@meridian-records.co">Submit Demo</a>
+      <a class="pill" href="#">Press Kit &nearr;</a>
+    </div>
+  </div>
+  <footer class="cls-foot">
+    <span>&copy; 2026 Meridian Records Ltd. All rights reserved.</span>
+    <span style="display:flex;gap:16px">
+      <a class="lbl" href="#" style="color:var(--muted);transition:color .2s" onmouseover="this.style.color='#E8913C'" onmouseout="this.style.color='var(--muted)'">Privacy</a>
+      <a class="lbl" href="#" style="color:var(--muted);transition:color .2s" onmouseover="this.style.color='#E8913C'" onmouseout="this.style.color='var(--muted)'">Instagram</a>
+      <a class="lbl" href="#" style="color:var(--muted);transition:color .2s" onmouseover="this.style.color='#E8913C'" onmouseout="this.style.color='var(--muted)'">Bandcamp</a>
+    </span>
+  </footer>
+  <div class="cls-wm" aria-hidden="true">MERIDIAN<span class="p">.</span></div>
+</section>
+
+<script>
+'use strict';
+const RM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ---- CARD DECK ---- */
+const CARDS = [
+  {t:'Weight of Wires',a:'Halcyon Wire',c:'MDN-024',y:'2026',
+   img:'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80&auto=format&fit=crop'},
+  {t:'Adoma',a:'Nneka Osei',c:'MDN-023',y:'2025',
+   img:'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&q=80&auto=format&fit=crop'},
+  {t:'Strata',a:'Pale Meridian',c:'MDN-022',y:'2025',
+   img:'https://images.unsplash.com/photo-1484876065684-b1cf45100a8e?w=600&q=80&auto=format&fit=crop'},
+  {t:'Yoru No Tobira',a:'Kaito Mura',c:'MDN-021',y:'2024',
+   img:'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&q=80&auto=format&fit=crop'},
+  {t:'After the Pressing',a:'The Lacquer Club',c:'MDN-020',y:'2024',
+   img:'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&q=80&auto=format&fit=crop'},
+];
+const STACK=[
+  {x:0,y:0,r:0,s:1},
+  {x:6,y:-6,r:1.4,s:.972},
+  {x:12,y:-12,r:2.8,s:.945},
+  {x:17,y:-17,r:4.2,s:.918},
+  {x:21,y:-20,r:5.0,s:.892},
+];
+
+const deckEl=document.getElementById('deck');
+const dotsEl=document.getElementById('dDots');
+let top=0;
+
+function buildDeck(){
+  deckEl.innerHTML='';dotsEl.innerHTML='';
+  CARDS.forEach((r,i)=>{
+    const d=document.createElement('div');
+    d.className='card';d.id='c'+i;
+    d.setAttribute('role','option');
+    d.setAttribute('aria-selected',i===0?'true':'false');
+    d.setAttribute('aria-label',r.t+' by '+r.a+', '+r.c);
+    d.innerHTML='<img src="'+r.img+'" alt="'+r.t+' sleeve" draggable="false" loading="lazy"/>'
+      +'<div class="card-lbl"><div><div class="card-title">'+r.t+'</div>'
+      +'<div class="card-code" style="margin-top:3px">'+r.a+'</div></div>'
+      +'<div style="text-align:right"><div class="card-code">'+r.c+'</div>'
+      +'<div class="card-code" style="margin-top:3px;color:#6C7378">'+r.y+'</div></div></div>';
+    deckEl.appendChild(d);
+    const dot=document.createElement('div');
+    dot.className='ddot'+(i===0?' on':'');
+    dotsEl.appendChild(dot);
+  });
+  applyStack(0);
+}
+
+function applyStack(idx){
+  top=idx;
+  const cards=deckEl.querySelectorAll('.card');
+  const n=cards.length;
+  cards.forEach((c,i)=>{
+    const slot=((i-idx)+n)%n;
+    const s=STACK[Math.min(slot,STACK.length-1)];
+    c.style.transition='transform .35s cubic-bezier(.22,.68,0,1.2),opacity .3s ease';
+    c.style.zIndex=n-slot;
+    c.style.opacity=slot<STACK.length?1:0;
+    c.style.transform='translate('+s.x+'px,'+s.y+'px) rotate('+s.r+'deg) scale('+s.s+')';
+    c.setAttribute('aria-selected',slot===0?'true':'false');
+  });
+  dotsEl.querySelectorAll('.ddot').forEach((d,i)=>d.classList.toggle('on',i===idx));
+  deckEl.setAttribute('aria-activedescendant','c'+idx);
+}
+
+function throwCard(dir){
+  const c=document.getElementById('c'+top);
+  if(!c)return;
+  const w=deckEl.getBoundingClientRect().width;
+  c.style.transition='transform .5s cubic-bezier(.4,.2,.2,1),opacity .45s ease';
+  c.style.transform='translate('+(dir>0?w*1.5:-w*1.5)+'px,-28px) rotate('+(dir>0?18:-18)+'deg) scale(1.04)';
+  c.style.opacity='0';
+  applyStack((top+1)%CARDS.length);
+}
+
+(function initDeck(){
+  let drag=false,sx=0,sy=0,cx=0,ac=null;
+  function tw(){return deckEl.getBoundingClientRect().width}
+  function down(e){
+    if(e.button!==undefined&&e.button!==0&&e.pointerType!=='touch')return;
+    drag=true;sx=e.clientX;sy=e.clientY;cx=0;
+    ac=document.getElementById('c'+top);
+    if(ac){ac.style.transition='none';deckEl.setPointerCapture&&deckEl.setPointerCapture(e.pointerId)}
+  }
+  function move(e){
+    if(!drag||!ac)return;
+    cx=e.clientX-sx;
+    const cy=e.clientY-sy;
+    ac.style.transform='translate('+cx+'px,'+(cy*.35)+'px) rotate('+(cx*.08)+'deg) scale(1.028)';
+  }
+  function up(){
+    if(!drag||!ac)return;drag=false;
+    if(Math.abs(cx)>tw()*.12){throwCard(cx>0?1:-1)}
+    else{
+      ac.style.transition='transform .35s cubic-bezier(.22,.68,0,1.2)';
+      const s=STACK[0];
+      ac.style.transform='translate('+s.x+'px,'+s.y+'px) rotate('+s.r+'deg) scale('+s.s+')';
+    }
+    ac=null;cx=0;
+  }
+  deckEl.addEventListener('pointerdown',down);
+  deckEl.addEventListener('pointermove',move);
+  deckEl.addEventListener('pointerup',up);
+  deckEl.addEventListener('pointercancel',up);
+  deckEl.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();throwCard(1)}
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();throwCard(-1)}
+  });
+})();
+buildDeck();
+
+/* ---- PORTAL SCROLL DRIVER ---- */
+(function initPortal(){
+  if(RM){
+    document.getElementById('pL').style.transform='translateX(-110%)';
+    document.getElementById('pR').style.transform='translateX(110%)';
+    document.getElementById('heroImg').style.transform='scale(1)';
+    return;
+  }
+  const heroEl=document.getElementById('home');
+  const pL=document.getElementById('pL'),pR=document.getElementById('pR');
+  const img=document.getElementById('heroImg'),duo=document.getElementById('heroDuo');
+  const title=document.getElementById('hTitle');
+  const tL=document.getElementById('tL'),tR=document.getElementById('tR');
+  const dA=document.getElementById('dA'),dT=document.getElementById('dT');
+  const TRAVEL=700;
+
+  function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+  function lerp(a,b,t){return a+(b-a)*t}
+
+  function tick(){
+    const scrolled=-heroEl.getBoundingClientRect().top;
+    const t=clamp(scrolled/TRAVEL,0,1);
+    const e=t*t*(3-2*t); // smoothstep
+
+    /* panels — travel their own width outward */
+    pL.style.transform='translateX(-'+(e*110)+'%)';
+    pR.style.transform='translateX('+(e*110)+'%)';
+
+    /* image settles from slight overscale */
+    img.style.transform='scale('+lerp(1.08,1.0,e)+')';
+
+    /* duotone overlay */
+    duo.style.opacity=(e*.18).toFixed(3);
+
+    /* accent dots travel to opposite corners */
+    const dt=e*200;
+    dA.style.transform='translate(calc(-50% + '+dt+'px),calc(-50% - '+(dt*.5)+'px))';
+    dT.style.transform='translate(calc(-50% - '+dt+'px),calc(-50% + '+(dt*.5)+'px))';
+    dA.style.opacity=(0.72-e*.6).toFixed(3);
+    dT.style.opacity=(0.72-e*.6).toFixed(3);
+
+    /* wordmark: scale UP, letter-spacing tightens, halves separate */
+    const sc=lerp(1.0,1.24,e);
+    const ls=lerp(-0.02,-0.066,e);
+    title.style.transform='scale('+sc+')';
+    title.style.letterSpacing=ls.toFixed(4)+'em';
+    const ht=e*40;
+    tL.style.transform='translateX(-'+ht+'%)';
+    tR.style.transform='translateX('+ht+'%)';
+  }
+
+  let tk=false;
+  window.addEventListener('scroll',()=>{
+    if(!tk){requestAnimationFrame(()=>{tick();tk=false});tk=true}
+  },{passive:true});
+  tick();
+})();
+
+/* ---- CIRCLE PARALLAX ---- */
+(function initCircle(){
+  if(RM)return;
+  const el=document.getElementById('stCircle');
+  let tk=false;
+  function tick(){
+    const r=el.closest('section').getBoundingClientRect();
+    const p=1-(r.top+r.height)/(window.innerHeight+r.height);
+    const ty=(p-.5)*64,rot=(p-.5)*14;
+    el.style.transform='translate(0,calc(-50% + '+ty+'px)) rotate('+rot+'deg)';
+  }
+  window.addEventListener('scroll',()=>{
+    if(!tk){requestAnimationFrame(()=>{tick();tk=false});tk=true}
+  },{passive:true});
+  tick();
+})();
+
+/* ---- ENTRY REVEALS (one-way, IntersectionObserver) ---- */
+(function initReveals(){
+  if(RM)return;
+  const els=[...document.querySelectorAll('.rv')];
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('on'));return}
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})
+  },{threshold:.1,rootMargin:'0px 0px -36px 0px'});
+  /* stagger siblings */
+  const seen=new Set();
+  els.forEach(el=>{
+    const p=el.parentElement;
+    if(!seen.has(p)){
+      seen.add(p);
+      [...p.querySelectorAll('.rv')].forEach((c,i)=>{c.style.transitionDelay=i*72+'ms'});
+    }
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
