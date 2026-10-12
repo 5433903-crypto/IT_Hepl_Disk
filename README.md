@@ -3,7 +3,8 @@
 **Final Year Computer Engineering Project Architecture & Specification Blueprint**  
 *Domain:* Network & AI Systems • *Frontend:* React.js + Tailwind CSS • *Backend:* Node.js / Express.js • *Database:* MongoDB / Mongoose
 
-url of live Deom: https://dual-ethical-belongs-raising.trycloudflare.com/login
+**Live Production URL:** [https://campus-it-help-desk.onrender.com](https://campus-it-help-desk.onrender.com)  
+**System Health Check:** [https://campus-it-help-desk.onrender.com/health](https://campus-it-help-desk.onrender.com/health)  
 
 ---
 
