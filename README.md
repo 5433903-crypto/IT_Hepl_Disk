@@ -3,8 +3,9 @@
 **Final Year Computer Engineering Project Architecture & Specification Blueprint**  
 *Domain:* Network & AI Systems • *Frontend:* React.js + Tailwind CSS • *Backend:* Node.js / Express.js • *Database:* MongoDB / Mongoose
 
-**Live Production URL:** [https://campus-it-help-desk.onrender.com](https://campus-it-help-desk.onrender.com)  
-**System Health Check:** [https://campus-it-help-desk.onrender.com/health](https://campus-it-help-desk.onrender.com/health)  
+**Active Live Public URL (Instant Access):** [https://invitation-established-allocation-housewives.trycloudflare.com](https://invitation-established-allocation-housewives.trycloudflare.com)  
+**Cloud Hosting URL (Render):** [https://campus-it-help-desk.onrender.com](https://campus-it-help-desk.onrender.com)  
+**System Health Check:** [https://invitation-established-allocation-housewives.trycloudflare.com/health](https://invitation-established-allocation-housewives.trycloudflare.com/health)  
 
 ---
 
