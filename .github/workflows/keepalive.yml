@@ -1,0 +1,21 @@
+name: Render Free Tier Keep-Alive
+
+on:
+  schedule:
+    # Ping every 10 minutes to prevent Render free-tier instance from sleeping (15-min idle timeout)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub Actions tab
+
+jobs:
+  ping-health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Campus IT Help Desk Production Health Endpoint
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://campus-it-help-desk.onrender.com/health || true)
+          echo "Health check HTTP status: $response"
+          if [ "$response" -eq 200 ]; then
+            echo "Campus IT Help Desk deployment is healthy and warm."
+          else
+            echo "Deployment responded with status $response (or wake-up in progress)."
+          fi
